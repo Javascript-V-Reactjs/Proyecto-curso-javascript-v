@@ -5,28 +5,30 @@ import AlertTag from "../components/AlertTag";
 export const AlertContext = createContext()
 
 export const AlertProvider = ({ children }) => {
-    const [message, setMessage] = useState('')
-    const [type, setType] = useState('')
-    const [isOpened, setIsOpenned] = useState(false)
-    
-    const sendAlert = ({type, message}) => {
-        setMessage(message)
-        setType(type)
-        setIsOpenned(true)
-    }
+    const [message, setMessage] = useState("");
+    const [type, setType] = useState("");
+    const [isOpened, setIsOpened] = useState(false);
+    const [autoClose, setAutoClose] = useState(5000)
+    const [position, setPosition] = useState("right")
 
-    
+    const sendAlert = ({ type, message, autoClose, position }) => {
+        setMessage(message);
+        setType(type);
+        setIsOpened(true);
+        setPosition(!position ? 'rigth' : position)
+        setAutoClose(!autoClose ? 5000 : autoClose)
+    };
 
     useEffect(() => {
-        const alertTimer = setTimeout(()=> {
-            setIsOpenned(false)
+        const alertTimer = setTimeout(() => {
+            setIsOpened(false)
+        }
+            , autoClose)
         return () => clearTimeout(alertTimer)
-        }, 5000)
-        
     })
 
     return (
-        <AlertContext.Provider value={{ sendAlert, type, message, isOpened, AlertTag}}>
+        <AlertContext.Provider value={{ sendAlert, type, message, isOpened, position}}>
             { children }
         </AlertContext.Provider>
     )
@@ -38,7 +40,7 @@ const useAlert = () => {
     if (context === undefined) {
         throw new Error(
             'You must wrap your application with <AlertProvider /> in order to useAlert().',
-          ) 
+        ) 
     }
     return context
 }
