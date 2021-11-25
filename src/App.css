@@ -2,7 +2,7 @@
  * Forced dark theme version
  */
 
- :root {
+:root {
   --background-body: #202b38;
   --background: #161f27;
   --background-alt: #1a242f;
@@ -35,17 +35,27 @@
   right: 2rem;
   top: 5rem;
   color: white;
-  
+  font-weight: bold;
   padding: 1rem;
   box-shadow: 3px 3px 16px 2px rgba(0,0,0,0.51);
 }
 
+.closeContent {
+  bottom: 3.5rem;
+  cursor: pointer;
+  position: absolute;
+  right: 1rem;
+  --text-main: #dbdbdb;
+}
+
 .warning {
   background-color: var(--warning);
+  padding: 1.8rem;
 }
 
 .success {
   background-color: var(--success);
+  padding: 1.8rem;
 }
 
 .danger {

@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom'
 
 const alertContainer = document.querySelector("#alert-root")
 
-const AlertTag = ({ message, type, isOpened, onClose, success}) => {
+const AlertTag = ({ message, type, isOpened}) => {
 
     if (!isOpened) return null
     return ReactDOM.createPortal(
-            <div className={`alert ${type}`}>
+        <div>
+            <div className = "closeContent" onClick = {(e) => {e.target.parentElement.style.display = 'none'}}>Close</div>
                 <span>{message}</span>
-            </div>,
+        </div>,
         alertContainer
     )
 }
